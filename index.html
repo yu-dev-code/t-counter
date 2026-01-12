@@ -2,44 +2,60 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>カウンター</title>
-
+  <title>足跡</title>
   <style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: #f5f5f5;
-  }
-  #counter {
-    border: 2px solid #333;
-    padding: 40px;
-    font-size: 48px;
-    border-radius: 12px;
-    background: white;
-    cursor: pointer;
-    user-select: none;
-  }
-</style>
-
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+    #counter {
+      border: 2px solid #333;
+      padding: 40px;
+      font-size: 48px;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 20px;
+    }
+    #decrement {
+      font-size: 16px;
+      padding: 6px 12px;
+      background: #ddd;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1 id="counter">0</h1>
+  <h2>足跡</h2>
+  <div id="counter">0</div>
+  <button id="decrement">戻る</button>
 
-<script>
-  const counter = document.getElementById('counter');
-  let count = Number(localStorage.getItem('count')) || 0;
-  counter.textContent = count;
-
-  counter.addEventListener('click', () => {
-    count++;
+  <script>
+    const counter = document.getElementById('counter');
+    const decrement = document.getElementById('decrement');
+    let count = Number(localStorage.getItem('count')) || 0;
     counter.textContent = count;
-    localStorage.setItem('count', count);
-  });
-</script>
 
+    counter.addEventListener('click', () => {
+      count++;
+      counter.textContent = count;
+      localStorage.setItem('count', count);
+    });
 
+    decrement.addEventListener('click', () => {
+      count--;
+      counter.textContent = count;
+      localStorage.setItem('count', count);
+    });
+  </script>
 </body>
 </html>
