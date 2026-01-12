@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>カウンター</title>
+
+  <style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f5f5f5;
+  }
+  #counter {
+    border: 2px solid #333;
+    padding: 40px;
+    font-size: 48px;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
+
+</head>
+<body>
+  <h1 id="counter">0</h1>
+
+<script>
+  const counter = document.getElementById('counter');
+  let count = Number(localStorage.getItem('count')) || 0;
+  counter.textContent = count;
+
+  counter.addEventListener('click', () => {
+    count++;
+    counter.textContent = count;
+    localStorage.setItem('count', count);
+  });
+</script>
+
+
+</body>
+</html>
