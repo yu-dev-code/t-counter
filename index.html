@@ -48,25 +48,46 @@
 <body>
   <h2>足跡</h2>
   <div id="counter">0</div>
+  <p id="lastDate" style="font-size:14px;color:#555;"></p>
   <button id="decrement">-1</button>
 
   <script>
-    const counter = document.getElementById('counter');
-    const decrement = document.getElementById('decrement');
-    let count = Number(localStorage.getItem('count')) || 0;
+  const counter = document.getElementById('counter');
+  const decrement = document.getElementById('decrement');
+  const lastDateEl = document.getElementById('lastDate');
+
+  let count = Number(localStorage.getItem('count')) || 0;
+  let lastDate = localStorage.getItem('lastDate') || '';
+
+  counter.textContent = count;
+  if (lastDate) {
+    lastDateEl.textContent = `最後に押した日：${lastDate}`;
+  }
+
+  function getToday() {
+    const d = new Date();
+    return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+  }
+
+  counter.addEventListener('click', () => {
+    count++;
+    const today = getToday();
+
     counter.textContent = count;
+    lastDateEl.textContent = `押した日：${today}`;
 
-    counter.addEventListener('click', () => {
-      count++;
-      counter.textContent = count;
-      localStorage.setItem('count', count);
-    });
+    localStorage.setItem('count', count);
+    localStorage.setItem('lastDate', today);
+  });
 
-    decrement.addEventListener('click', () => {
+  decrement.addEventListener('click', () => {
+    if (count > 0) {
       count--;
       counter.textContent = count;
       localStorage.setItem('count', count);
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 </html>
